@@ -6,6 +6,7 @@ import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertThrows;
 
 public class MatrixTests {
 
@@ -26,11 +27,25 @@ public class MatrixTests {
 
     @Test
     @DisplayName("Test creating a Matrix")
-    public void createNewMatrix() {
-        matrix = MatrixFactory.generateMatrix(1,
-                new Double[]{6.0, -1.0, 3.0}
+    public void createNewMatrixWhenValid() {
+        matrix = MatrixFactory.generateMatrix(
+                new Double[]{6.0, -1.0, 3.0},
+                new Double[]{5.0, -3.3, -5.6}
         );
-        assertEquals(6.0, matrix.getValue(1, 1), 0.1);
+
+        assertEquals(-5.6, matrix.getValue(2, 3), 0.1);
     }
 
+    @Test
+    @DisplayName("Creating an invalid Matrix should throw an IllegalArgumentException")
+    public void createNewMatrixWhenInvalid_ThenThrowException() {
+        assertThrows(IllegalArgumentException.class,
+                () -> {
+                    matrix = MatrixFactory.generateMatrix(
+                            new Double[]{6.0, -1.0, 3.0},
+                            new Double[]{5.0, -3.3, -5.6, 3.0}
+                    );
+                }
+        );
+    }
 }

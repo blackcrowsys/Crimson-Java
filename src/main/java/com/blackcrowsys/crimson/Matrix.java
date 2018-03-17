@@ -2,8 +2,6 @@ package com.blackcrowsys.crimson;
 
 import lombok.Data;
 
-import java.util.Arrays;
-
 @Data
 public class Matrix {
 
@@ -28,4 +26,5 @@ public class Matrix {
         newMatrix[row][column] = newValue;
         return newMatrix;
     }
+
 }
