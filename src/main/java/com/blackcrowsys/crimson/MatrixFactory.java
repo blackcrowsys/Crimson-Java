@@ -1,14 +1,30 @@
 package com.blackcrowsys.crimson;
 
-public class MatrixFactory {
+import org.jetbrains.annotations.NotNull;
 
-    public static Matrix generateMatrix(final Double[]... rows) {
+class MatrixFactory {
+
+    private MatrixFactory() {
+        throw new IllegalStateException("Utility Class");
+    }
+
+    @NotNull
+    static Matrix generateMatrix(final Double[]... rows) {
+        if (rows.length == 0)
+            throw new IllegalArgumentException("Matrix is empty");
         final int numOfColumns = rows[0].length;
-        Double[][] matrix = new Double[rows.length][numOfColumns];
-        for (int i = 0; i < rows.length; i++) {
+        final int numOfRows = rows.length;
+        Double[][] matrix = new Double[numOfRows][numOfColumns];
+        for (int i = 0; i < numOfRows; i++) {
+            if (rows[i].length > numOfColumns)
+                throw new IllegalArgumentException("Matrix size mismatch, too many columns");
             matrix[i] = rows[i];
-            if (rows[i].length > numOfColumns) throw new IllegalArgumentException("Matrix size mismatch");
         }
         return new Matrix(matrix);
+    }
+
+    @NotNull
+    static Matrix generateMatrixFromArray(final Double[][] matrixArray) {
+        return new Matrix(matrixArray);
     }
 }
