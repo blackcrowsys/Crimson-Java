@@ -44,7 +44,7 @@ class Matrix {
                 sumMatrix[row][column] = this.matrixArray[row][column] + addMatrixArray[row][column];
             }
         }
-        return MatrixFactory.generateMatrixFromArray(sumMatrix);
+        return MatrixFactory.generateMatrix(sumMatrix);
     }
 
     public boolean isEmpty() {

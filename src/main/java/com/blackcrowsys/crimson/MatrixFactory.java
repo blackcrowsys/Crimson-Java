@@ -9,7 +9,7 @@ class MatrixFactory {
     }
 
     @NotNull
-    static Matrix generateMatrix(final Double[]... rows) {
+    static Matrix createMatrix(final Double[]... rows) {
         if (rows.length == 0)
             throw new IllegalArgumentException("Matrix is empty");
         final int numOfColumns = rows[0].length;
@@ -24,7 +24,7 @@ class MatrixFactory {
     }
 
     @NotNull
-    static Matrix generateMatrixFromArray(final Double[][] matrixArray) {
+    static Matrix generateMatrix(final Double[][] matrixArray) {
         return new Matrix(matrixArray);
     }
 }
