@@ -8,13 +8,11 @@ import java.util.ArrayList;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
-import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertThrows;
 
 class MatrixFactoryTest {
-    private Matrix matrix1;
 
-    private Matrix matrix2;
+    private Matrix matrix1;
 
     @BeforeEach
     void setUp() {
@@ -23,12 +21,14 @@ class MatrixFactoryTest {
     }
 
     @Test
-    @DisplayName("Create new Matrix")
-    void get_IndexGiven_ShouldReturnMatrixValue() {
-        assertEquals(3.00, matrix1.get(1, 1), 0.001);
-        assertEquals(2.00, matrix1.get(1, 2), 0.001);
-        assertEquals(3.142, matrix1.get(2, 1), 0.001);
-        assertEquals(-0.2, matrix1.get(2, 2), 0.001);
+    @DisplayName("Create Matrix tests")
+    void generateMatrix_ArrayListAndNumberOfColumnsGiven_ShouldIfInvalid() {
+        assertThrows(IllegalArgumentException.class, () ->  MatrixFactory.generateMatrix(Stream.of(3.0, 2.0,  3.142, -0.2)
+                .collect(Collectors.toCollection(ArrayList::new)), 3));
+        assertThrows(IllegalArgumentException.class, () ->  MatrixFactory.generateMatrix(Stream.of(3.0, 2.0,  3.142, -0.2)
+                .collect(Collectors.toCollection(ArrayList::new)), 0));
+        assertThrows(IllegalArgumentException.class, () ->  MatrixFactory.generateMatrix(Stream.of(2.0)
+                .collect(Collectors.toCollection(ArrayList::new)), 0));
     }
 
 }

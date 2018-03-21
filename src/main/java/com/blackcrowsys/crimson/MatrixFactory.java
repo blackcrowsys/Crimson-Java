@@ -1,5 +1,6 @@
 package com.blackcrowsys.crimson;
 
+import io.vavr.collection.List;
 import org.jetbrains.annotations.NotNull;
 
 import java.util.ArrayList;
@@ -12,10 +13,11 @@ class MatrixFactory {
 
     @NotNull
     static Matrix generateMatrix(final ArrayList<Double> contents, int numOfColumns) {
-        if ((contents.size() % numOfColumns != 0) || (numOfColumns < 1)) {
+        if ((numOfColumns < 1) || (contents.size() % numOfColumns != 0)) {
             throw new IllegalArgumentException("Contents mismatch");
         }
-        return new Matrix(contents, numOfColumns);
+        List matrixContents = List.ofAll(contents);
+        return new Matrix(matrixContents, numOfColumns);
     }
 
 }

@@ -33,4 +33,13 @@ class MatrixTests {
         assertEquals(9.0, resultMatrix.get(1, 1), 0.1);
     }
 
+    @Test
+    @DisplayName("Create new Matrix")
+    void get_IndexGiven_ShouldReturnMatrixValue() {
+        assertEquals(3.00, matrix1.get(1, 1), 0.001);
+        assertEquals(2.00, matrix1.get(1, 2), 0.001);
+        assertEquals(3.142, matrix1.get(2, 1), 0.001);
+        assertEquals(-0.2, matrix1.get(2, 2), 0.001);
+    }
+
 }
