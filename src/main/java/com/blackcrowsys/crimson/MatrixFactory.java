@@ -2,6 +2,8 @@ package com.blackcrowsys.crimson;
 
 import org.jetbrains.annotations.NotNull;
 
+import java.util.ArrayList;
+
 class MatrixFactory {
 
     private MatrixFactory() {
@@ -9,22 +11,11 @@ class MatrixFactory {
     }
 
     @NotNull
-    static Matrix createMatrix(final Double[]... rows) {
-        if (rows.length == 0)
-            throw new IllegalArgumentException("Matrix is empty");
-        final int numOfColumns = rows[0].length;
-        final int numOfRows = rows.length;
-        Double[][] matrix = new Double[numOfRows][numOfColumns];
-        for (int i = 0; i < numOfRows; i++) {
-            if (rows[i].length > numOfColumns)
-                throw new IllegalArgumentException("Matrix size mismatch, too many columns");
-            matrix[i] = rows[i];
+    static Matrix generateMatrix(final ArrayList<Double> contents, int numOfColumns) {
+        if ((contents.size() % numOfColumns != 0) || (numOfColumns < 1)) {
+            throw new IllegalArgumentException("Contents mismatch");
         }
-        return new Matrix(matrix);
+        return new Matrix(contents, numOfColumns);
     }
 
-    @NotNull
-    static Matrix generateMatrix(final Double[][] matrixArray) {
-        return new Matrix(matrixArray);
-    }
 }
