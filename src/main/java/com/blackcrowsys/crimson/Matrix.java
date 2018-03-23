@@ -21,6 +21,10 @@ public class Matrix {
         this.rows = this.contents.size() / this.columns;
     }
 
+    private static Double mulitplyDoubles(Double a, Double b) {
+        return a * b;
+    }
+
     public Double get(final int row, final int column) {
         if (column > this.columns || column < 1) {
             throw new IllegalArgumentException(("Incorrect Column Index: " + column));
@@ -46,8 +50,11 @@ public class Matrix {
         return MatrixFactory.create(newContents, this.columns);
     }
 
+    public Matrix multiplyByScaler(final Double d) {
+        return apply(Matrix::mulitplyDoubles, d);
+    }
+
     private int getIndex(final int row, final int column) {
         return (row - 1) * this.columns + (column - 1);
     }
-    
 }
