@@ -6,41 +6,40 @@ import lombok.Data;
 import java.util.ArrayList;
 
 @Data
-class Matrix {
+public class Matrix {
 
-    private List<Double> contents;
+    private final List<Double> contents;
 
-    private int numOfColumns;
+    private final int columns;
 
-    private int numOfRows;
+    private int rows;
 
-    Matrix(List contents, int numOfColumns) {
-        this.setContents(contents);
-        this.setNumOfColumns(numOfColumns);
-        this.numOfRows = contents.size() / this.numOfColumns;
+    public Matrix(final List<Double> contents, final int columns) {
+        this.contents = contents;
+        this.columns = columns;
+        this.rows = this.contents.size() / this.columns;
     }
 
-
-    Double get(int row, int column) {
-        if (column > this. numOfColumns  || column < 1) {
+    public Double get(final int row, final int column) {
+        if (column > this.columns || column < 1) {
             throw new IllegalArgumentException(("Incorrect Column Index: " + column));
         }
-        if (row > contents.size() / this.numOfColumns || row < 1) {
+        if (row > contents.size() / this.columns || row < 1) {
             throw new IllegalArgumentException("Incorrect Row Index: " + row);
         }
         return contents.get(getIndex(row, column));
     }
 
-    Matrix sum(final Matrix thatMatrix) {
-        if ((this.getNumOfRows() != thatMatrix.getNumOfRows()) && (this.getNumOfColumns() != thatMatrix.getNumOfColumns()))
+    public Matrix add(final Matrix that) {
+        if ((this.getRows() != that.getRows()) && (this.getColumns() != that.getColumns()))
             throw new IllegalArgumentException("Matrix size mismatch");
         ArrayList<Double> sum = new ArrayList<>();
         for (int i = 0; i < this.contents.size(); i++)
-            sum.add(this.contents.get(i) + thatMatrix.getContents().get(i));
-        return MatrixFactory.generateMatrix(sum, this.numOfColumns);
+            sum.add(this.contents.get(i) + that.getContents().get(i));
+        return MatrixFactory.create(sum, this.columns);
     }
 
     private int getIndex(final int row, final int column) {
-        return (row - 1) * this.numOfColumns + (column - 1);
+        return (row - 1) * this.columns + (column - 1);
     }
 }

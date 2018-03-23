@@ -5,14 +5,14 @@ import org.jetbrains.annotations.NotNull;
 
 import java.util.ArrayList;
 
-class MatrixFactory {
+public class MatrixFactory {
 
     private MatrixFactory() {
         throw new IllegalStateException("Utility Class");
     }
 
     @NotNull
-    static Matrix generateMatrix(final ArrayList<Double> contents, int numOfColumns) {
+    public static Matrix create(final ArrayList<Double> contents, final int numOfColumns) {
         if ((numOfColumns < 1) || (contents.size() % numOfColumns != 0)) {
             throw new IllegalArgumentException("Contents mismatch");
         }

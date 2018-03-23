@@ -19,23 +19,21 @@ class MatrixTests {
 
     @BeforeEach
     void setUp() {
-        matrix1 = MatrixFactory.generateMatrix(Stream.of(3.0, 2.0,  3.142, -0.2)
+        matrix1 = MatrixFactory.create(Stream.of(3.0, 2.0,  3.142, -0.2)
                 .collect(Collectors.toCollection(ArrayList::new)), 2);
 
-        matrix2 = MatrixFactory.generateMatrix(Stream.of(6.0, -2.0,  13.2, -0.2)
+        matrix2 = MatrixFactory.create(Stream.of(6.0, -2.0,  13.2, -0.2)
                 .collect(Collectors.toCollection(ArrayList::new)), 2);
     }
 
     @Test
-    @DisplayName("Sum two Matrices")
-    void sum() {
-        resultMatrix = matrix1.sum(matrix2);
+    public void testAddingTwoMatricesOfSameSize() {
+        resultMatrix = matrix1.add(matrix2);
         assertEquals(9.0, resultMatrix.get(1, 1), 0.1);
     }
 
     @Test
-    @DisplayName("Create new Matrix")
-    void get_IndexGiven_ShouldReturnMatrixValue() {
+    void testGettingValuesByRowColumn() {
         assertEquals(3.00, matrix1.get(1, 1), 0.001);
         assertEquals(2.00, matrix1.get(1, 2), 0.001);
         assertEquals(3.142, matrix1.get(2, 1), 0.001);
