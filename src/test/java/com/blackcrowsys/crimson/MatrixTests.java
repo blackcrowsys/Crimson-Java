@@ -33,11 +33,10 @@ class MatrixTests {
     }
 
     @Test
-    void testGettingValuesByRowColumn() {
+    public void testGettingValuesByRowColumn() {
         assertEquals(3.00, matrix1.get(1, 1), 0.001);
         assertEquals(2.00, matrix1.get(1, 2), 0.001);
         assertEquals(3.142, matrix1.get(2, 1), 0.001);
         assertEquals(-0.2, matrix1.get(2, 2), 0.001);
     }
-
 }
