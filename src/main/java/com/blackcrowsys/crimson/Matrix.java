@@ -4,6 +4,7 @@ import io.vavr.collection.List;
 import lombok.Data;
 
 import java.util.ArrayList;
+import java.util.function.BiFunction;
 
 @Data
 public class Matrix {
@@ -39,7 +40,14 @@ public class Matrix {
         return MatrixFactory.create(sum, this.columns);
     }
 
+    public Matrix apply(final BiFunction<Double, Double, Double> f, final Double d) {
+        ArrayList<Double> newContents = new ArrayList<>();
+        contents.forEach(value -> newContents.add(f.apply(value, d)));
+        return MatrixFactory.create(newContents, this.columns);
+    }
+
     private int getIndex(final int row, final int column) {
         return (row - 1) * this.columns + (column - 1);
     }
+    
 }
