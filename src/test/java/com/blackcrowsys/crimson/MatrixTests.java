@@ -1,9 +1,9 @@
 package com.blackcrowsys.crimson;
 import org.junit.jupiter.api.BeforeEach;
-import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
 import java.util.ArrayList;
+import java.util.function.Function;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
@@ -43,7 +43,10 @@ class MatrixTests {
 
     @Test
     public void testApplyingAFunction() {
-        resultMatrix = matrix2.apply(Math::pow, 2.0);
+        Function<Double, Double> power = (Double x) -> {
+            return Math.pow(x, 2.0);
+        };
+        resultMatrix = matrix2.apply(power);
         assertEquals(4.0, resultMatrix.get(1, 1), 0.1);
         assertEquals(16.0, resultMatrix.get(1, 2), 0.1);
         assertEquals(36.0, resultMatrix.get(2, 1), 0.1);
