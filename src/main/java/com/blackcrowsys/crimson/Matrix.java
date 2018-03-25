@@ -51,7 +51,8 @@ public class Matrix {
     }
 
     public Matrix multiplyByScaler(final Double d) {
-        return apply(Matrix::mulitplyDoubles, d);
+        Function<Double, Double> multiply = (Double x) -> mulitplyDoubles(x, d);
+        return apply(multiply);
     }
 
     private int getIndex(final int row, final int column) {
