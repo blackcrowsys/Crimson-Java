@@ -16,6 +16,8 @@ class MatrixTests {
 
     private Matrix matrix2;
 
+    private Matrix matrix3;
+
     private Matrix resultMatrix;
 
     @BeforeEach
@@ -25,6 +27,9 @@ class MatrixTests {
 
         matrix2 = MatrixFactory.create(Stream.of(2.0, -4.0, 6.0, -8.0)
                 .collect(Collectors.toCollection(ArrayList::new)), 2);
+
+        matrix3 = MatrixFactory.create(Stream.of(1.0, 2.0, 3.0, 4.0, 5.0, 6.0, 7.0, 8.0, 9.0, 10.0, 11.0, 12.0)
+                .collect(Collectors.toCollection(ArrayList::new)), 3);
     }
 
     @Test
@@ -60,5 +65,24 @@ class MatrixTests {
         assertEquals(-8.0, resultMatrix.get(1, 2), 0.1);
         assertEquals(12.0, resultMatrix.get(2, 1), 0.1);
         assertEquals(-16.0, resultMatrix.get(2, 2), 0.1);
+    }
+
+    @Test
+    public void testTransposing() {
+        resultMatrix = matrix3.transpose();
+        assertEquals(1.0, resultMatrix.get(1, 1), 0.1);
+        assertEquals(4.0, resultMatrix.get(1, 2), 0.1);
+        assertEquals(7.0, resultMatrix.get(1, 3), 0.1);
+        assertEquals(10.0, resultMatrix.get(1, 4), 0.1);
+
+        assertEquals(2.0, resultMatrix.get(2, 1), 0.1);
+        assertEquals(5.0, resultMatrix.get(2, 2), 0.1);
+        assertEquals(8.0, resultMatrix.get(2, 3), 0.1);
+        assertEquals(11.0, resultMatrix.get(2, 4), 0.1);
+
+        assertEquals(3.0, resultMatrix.get(3, 1), 0.1);
+        assertEquals(6.0, resultMatrix.get(3, 2), 0.1);
+        assertEquals(9.0, resultMatrix.get(3, 3), 0.1);
+        assertEquals(12.0, resultMatrix.get(3, 4), 0.1);
     }
 }

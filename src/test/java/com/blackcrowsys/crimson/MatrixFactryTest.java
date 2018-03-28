@@ -16,18 +16,18 @@ class MatrixFactoryTest {
 
     @BeforeEach
     void setUp() {
-        matrix1 = MatrixFactory.create(Stream.of(3.0, 2.0,  3.142, -0.2)
+        matrix1 = MatrixFactory.create(Stream.of(3.0, 2.0, 3.142, -0.2)
                 .collect(Collectors.toCollection(ArrayList::new)), 2);
     }
 
     @Test
     @DisplayName("Create Matrix tests")
     void testCreatingMarixUsingFactory() {
-        assertThrows(IllegalArgumentException.class, () ->  MatrixFactory.create(Stream.of(3.0, 2.0,  3.142, -0.2)
+        assertThrows(IllegalArgumentException.class, () -> MatrixFactory.create(Stream.of(3.0, 2.0, 3.142, -0.2)
                 .collect(Collectors.toCollection(ArrayList::new)), 3));
-        assertThrows(IllegalArgumentException.class, () ->  MatrixFactory.create(Stream.of(3.0, 2.0,  3.142, -0.2)
+        assertThrows(IllegalArgumentException.class, () -> MatrixFactory.create(Stream.of(3.0, 2.0, 3.142, -0.2)
                 .collect(Collectors.toCollection(ArrayList::new)), 0));
-        assertThrows(IllegalArgumentException.class, () ->  MatrixFactory.create(Stream.of(2.0)
+        assertThrows(IllegalArgumentException.class, () -> MatrixFactory.create(Stream.of(2.0)
                 .collect(Collectors.toCollection(ArrayList::new)), 0));
     }
 
