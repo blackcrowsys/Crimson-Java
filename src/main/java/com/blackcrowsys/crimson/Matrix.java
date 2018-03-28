@@ -1,5 +1,7 @@
 package com.blackcrowsys.crimson;
 
+import io.vavr.Tuple;
+import io.vavr.Tuple2;
 import io.vavr.collection.List;
 import lombok.Data;
 
@@ -23,6 +25,10 @@ public class Matrix {
 
     private static Double mulitplyDoubles(Double a, Double b) {
         return a * b;
+    }
+
+    private static Integer floor(double a) {
+        return ((Double) Math.floor(a)).intValue();
     }
 
     public Double get(final int row, final int column) {
@@ -55,7 +61,37 @@ public class Matrix {
         return apply(multiply);
     }
 
+    public Matrix transpose() {
+        final Integer arraySize = this.rows * this.columns;
+        ArrayList<Double> results = new ArrayList<>(arraySize);
+        for (int index = 0; index < arraySize; index++)
+            results.add(index, getTransposeFromIndex(index));
+        return MatrixFactory.create(results, this.rows);
+    }
+
     private int getIndex(final int row, final int column) {
         return (row - 1) * this.columns + (column - 1);
+    }
+
+    private Double getTransposeFromIndex(final Integer index) {
+        Tuple2<Integer, Integer> coords = getCoords(index, this.rows);
+        return get(coords);
+    }
+
+    private Tuple2<Integer, Integer> getCoords(Integer index, int columns) {
+        final Integer row = floor(index / columns) + 1;
+        final Integer colIndex = (index + 1) % columns;
+        final Integer col;
+        if (colIndex == 0) col = columns;
+        else col = colIndex;
+        return Tuple.of(row, col);
+    }
+
+    private Double get(Tuple2<Integer, Integer> coords) {
+        if (coords._2 > this.rows || coords._2 < 1)
+            throw new IllegalArgumentException("Incorrect Column Index: " + coords._2);
+        if (coords._1 > this.contents.size() / this.rows || coords._1 < 1)
+            throw new IllegalArgumentException("Incorrect Row Index: " + coords._1);
+        return contents.get(getIndex(coords._2, coords._1));
     }
 }
