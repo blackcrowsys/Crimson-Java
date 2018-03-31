@@ -23,10 +23,6 @@ public class Matrix {
         this.rows = this.contents.size() / this.columns;
     }
 
-    private static Double mulitplyDoubles(Double a, Double b) {
-        return a * b;
-    }
-
     private static Integer floor(double a) {
         return ((Double) Math.floor(a)).intValue();
     }
@@ -57,7 +53,7 @@ public class Matrix {
     }
 
     public Matrix multiplyByScaler(final Double d) {
-        Function<Double, Double> multiply = (Double x) -> mulitplyDoubles(x, d);
+        Function<Double, Double> multiply = (Double x) -> x * d;
         return apply(multiply);
     }
 
